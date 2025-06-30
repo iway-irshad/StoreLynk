@@ -56,7 +56,8 @@ public class AuthServiceImpl implements AuthService {
                     throw new Exception("Seller does not exist with this email");
                 }
 
-            } else {
+            }
+            if (role.equals(USER_ROLE.ROLE_CUSTOMER)) {
                 User user = userRepository.findByEmail(email);
                 if (user == null) {
                     throw new Exception("User does not exist with this email");

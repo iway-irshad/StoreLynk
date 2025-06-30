@@ -9,4 +9,5 @@ public class AuthResponse {
     private String jwtToken;
     private String message;
     private USER_ROLE role;
+    private String name;
 }

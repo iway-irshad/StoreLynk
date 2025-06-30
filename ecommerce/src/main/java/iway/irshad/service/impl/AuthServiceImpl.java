@@ -170,6 +170,8 @@ public class AuthServiceImpl implements AuthService {
         AuthResponse authResponse = new AuthResponse();
         authResponse.setJwtToken(jwtToken);
         authResponse.setMessage("Login successful");
+        User user = userRepository.findByEmail(username);
+        authResponse.setName(user.getFirstName() + " " + user.getLastName());
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         String roleName = authorities.isEmpty()?null:authorities.iterator().next().getAuthority();

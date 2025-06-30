@@ -27,6 +27,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -68,9 +70,22 @@ public class AuthServiceImpl implements AuthService {
         }
 
         VerificationCode isExist = verificationCodeRepository.findByEmail(email);
+
         if (isExist != null) {
-            verificationCodeRepository.delete(isExist);
+            // Make sure createdAt is not null too (optional safety check)
+            if (isExist.getCreatedAt() != null) {
+                Duration duration = Duration.between(isExist.getCreatedAt(), LocalDateTime.now());
+
+                if (duration.toMinutes() >= 1) {
+                    verificationCodeRepository.delete(isExist);
+                    throw new Exception("OTP expired. Please request a new one.");
+                }
+            } else {
+                // Defensive fallback if createdAt is somehow null
+                verificationCodeRepository.delete(isExist);
+            }
         }
+
 
         String otp = OtpUtil.generateOtp();
 

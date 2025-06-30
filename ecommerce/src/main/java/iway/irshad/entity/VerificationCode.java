@@ -3,6 +3,8 @@ package iway.irshad.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 
 @Entity
 @Setter
@@ -20,10 +22,16 @@ public class VerificationCode {
 
     private String email;
 
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+
+    private int attemptCount = 0;
+
     @OneToOne
     private User user;
 
     @OneToOne
     private Seller seller;
+
 }
 

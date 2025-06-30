@@ -22,7 +22,7 @@ public class EmailService {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, "utf-8");
 
             mimeMessageHelper.setSubject(subject);
-            mimeMessageHelper.setText(content);
+            mimeMessageHelper.setText(content, true);
             mimeMessageHelper.setTo(to);
             // mimeMessageHelper.setBcc("reply.web7@gmail.com");
             mailSender.send(mimeMessage);

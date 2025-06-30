@@ -78,8 +78,43 @@ public class AuthServiceImpl implements AuthService {
         verificationCode.setEmail(email);
         verificationCodeRepository.save(verificationCode);
 
-        String subject = "New Ecom Verification Code(OTP)";
-        String content = "Your verification code is - " + otp;
+        String subject = "Your StoreLynk Verification Code";
+
+        String content = """
+<html>
+  <body style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 30px;">
+    <table style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
+      <tr>
+        <td style="text-align: center;">
+          <h2 style="color: #009688; margin-bottom: 10px;">StoreLynk</h2>
+          <p style="font-size: 16px; color: #555555;">Your One-Time Password (OTP) is below</p>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center; padding: 20px 0;">
+          <div style="display: inline-block; padding: 10px 20px; font-size: 24px; letter-spacing: 5px; font-weight: bold; background-color: #e0f2f1; color: #00796b; border-radius: 6px;">
+            """ + otp + """
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-top: 20px; font-size: 14px; color: #777;">
+          <p>Please do not share this code with anyone. It will expire in 10 minutes.</p>
+          <p>If you didn’t request this code, please ignore this email.</p>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-top: 30px; font-size: 14px; color: #aaa; text-align: center;">
+          <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+          <p>&copy; 2025 StoreLynk. All rights reserved.</p>
+          <p>Contact: reply.web7@gmail.com</p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+""";
+
 
         emailService.sendVerificationOTPEmail(email, subject, content);
 

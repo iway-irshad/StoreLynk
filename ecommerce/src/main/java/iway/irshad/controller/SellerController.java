@@ -42,6 +42,7 @@ public class SellerController {
         String email = request.getEmail();
 
         request.setEmail("seller_" + email);
+        System.out.println(otp + " " + email);
 
         AuthResponse authResponse = authService.signing(request);
         return ResponseEntity.ok(authResponse);

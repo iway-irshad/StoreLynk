@@ -10,7 +10,7 @@ public class HomeController {
     @GetMapping
     public ApiResponse HomeControllerHandler() {
         ApiResponse apiResponse = new ApiResponse();
-        apiResponse.setMessage("Hello World");
+        apiResponse.setMessage("Welcome to the multivendor Ecommerce Platform (Store Lynk).");
         return apiResponse;
     }
 }

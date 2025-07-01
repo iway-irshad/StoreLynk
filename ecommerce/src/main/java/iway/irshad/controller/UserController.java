@@ -14,7 +14,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/user/profile")
+    @GetMapping("/api/user/profile")
     public ResponseEntity<User> userProfileHandler(
             @RequestHeader("Authorization") String jwtToken
     ) throws Exception {

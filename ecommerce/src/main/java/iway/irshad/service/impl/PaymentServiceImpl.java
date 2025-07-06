@@ -18,6 +18,7 @@ import iway.irshad.repository.PaymentOrderRepository;
 import iway.irshad.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -29,10 +30,16 @@ public class PaymentServiceImpl implements PaymentService {
     private final PaymentOrderRepository paymentOrderRepository;
     private final OrderRepository orderRepository;
 
-    private final String apiKey = System.getenv("API_KEY");
-    private final String apiSecret = System.getenv("API_SECRET");
+    @Value("${stripe.api.key}")
+    private String stripeSecretKey;
 
-    private final String stripeSecretKey = System.getenv("STRIPE_SECRET");
+
+    @Value("${razorpay.api.key}")
+    private String razorpayApiKey;
+
+    @Value("${razorpay.api.secret}")
+    private String razorpaySecretKey;
+
 
 
 
@@ -68,7 +75,7 @@ public class PaymentServiceImpl implements PaymentService {
 
         if (paymentOrder.getStatus().equals(PaymentOrderStatus.PENDING)) {
 
-            RazorpayClient razorpayClient = new RazorpayClient(apiKey, apiSecret);
+            RazorpayClient razorpayClient = new RazorpayClient(razorpayApiKey, razorpaySecretKey);
 
             Payment payment = razorpayClient.payments.fetch(paymentId);
 
@@ -96,7 +103,7 @@ public class PaymentServiceImpl implements PaymentService {
         amount = amount * 100;
 
         try {
-            RazorpayClient razorpayClient = new RazorpayClient(apiKey, apiSecret);
+            RazorpayClient razorpayClient = new RazorpayClient(razorpayApiKey, razorpaySecretKey);
 
             JSONObject paymentLinkRequest = new JSONObject();
             paymentLinkRequest.put("amount", amount);

@@ -1,6 +1,6 @@
 package iway.irshad.domain;
 
-public enum HomeCategorySelection {
+public enum HomeCategorySection {
 
     ELECTRIC_CATEGORIES,
     GRID,

@@ -1,6 +1,6 @@
 package iway.irshad.service.impl;
 
-import iway.irshad.domain.HomeCategorySelection;
+import iway.irshad.domain.HomeCategorySection;
 import iway.irshad.entity.Deal;
 import iway.irshad.entity.Home;
 import iway.irshad.entity.HomeCategory;
@@ -23,29 +23,29 @@ public class HomeServiceImpl implements HomeService {
 
         List<HomeCategory> gridCategories = allCategories.stream()
                 .filter(category ->
-                        category.getSelection() == HomeCategorySelection.GRID)
+                        category.getSection() == HomeCategorySection.GRID)
                 .collect(Collectors.toList());
 
         List<HomeCategory> shopByCategories = allCategories.stream()
                 .filter(category ->
-                        category.getSelection() == HomeCategorySelection.SHOP_BY_CATEGORIES)
+                        category.getSection() == HomeCategorySection.SHOP_BY_CATEGORIES)
                 .collect(Collectors.toList());
 
         List<HomeCategory> electricCategories = allCategories.stream()
                 .filter(category ->
-                        category.getSelection() == HomeCategorySelection.ELECTRIC_CATEGORIES)
+                        category.getSection() == HomeCategorySection.ELECTRIC_CATEGORIES)
                 .collect(Collectors.toList());
 
         List<HomeCategory> dealCategories = allCategories.stream()
                 .filter(category ->
-                        category.getSelection() == HomeCategorySelection.DEALS)
+                        category.getSection() == HomeCategorySection.DEALS)
                 .toList();
 
         List<Deal> createdDeals = new ArrayList<>();
 
         if (dealRepository.findAll().isEmpty()) {
             List<Deal> deals = allCategories.stream()
-                    .filter(dealCategory -> dealCategory.getSelection() == HomeCategorySelection.DEALS)
+                    .filter(dealCategory -> dealCategory.getSection() == HomeCategorySection.DEALS)
                     .map(dealCategory -> new Deal(null, 10, dealCategory))
                     .collect(Collectors.toList());
             createdDeals = dealRepository.saveAll(deals);

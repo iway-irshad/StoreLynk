@@ -23,7 +23,7 @@ public class Address {
     private String locality;
     private String city;
     private String state;
-    private String zip;
+    private String pinCode = "802301";
     private String address;
     private String country;
     private String phone;

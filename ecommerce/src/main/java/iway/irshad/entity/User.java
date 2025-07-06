@@ -28,7 +28,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    private String phone;
+    private String mobile;
     private USER_ROLE role = USER_ROLE.ROLE_CUSTOMER;
 
     @OneToMany

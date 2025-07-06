@@ -38,12 +38,15 @@ public class SellerController {
     public ResponseEntity<AuthResponse> loginSeller(
             @RequestBody LoginRequest request
             ) throws Exception {
+
+        System.out.println("Request:-----------------------------> Reaches in backend");
         String otp = request.getOtp();
         String email = request.getEmail();
 
         request.setEmail("seller_" + email);
         System.out.println(otp + " " + email);
 
+        request.setEmail("seller_" + email);
         AuthResponse authResponse = authService.signing(request);
         return ResponseEntity.ok(authResponse);
     }

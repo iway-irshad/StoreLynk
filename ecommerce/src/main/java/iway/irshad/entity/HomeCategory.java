@@ -1,6 +1,6 @@
 package iway.irshad.entity;
 
-import iway.irshad.domain.HomeCategorySelection;
+import iway.irshad.domain.HomeCategorySection;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,5 +19,5 @@ public class HomeCategory {
    private String name;
    private String image;
    private String categoryId;
-   private HomeCategorySelection selection;
+   private HomeCategorySection section;
 }

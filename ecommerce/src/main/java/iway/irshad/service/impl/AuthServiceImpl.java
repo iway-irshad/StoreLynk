@@ -154,7 +154,7 @@ public class AuthServiceImpl implements AuthService {
             newUser.setFirstName(request.getFirstName());
             newUser.setLastName(request.getLastName());
             newUser.setRole(USER_ROLE.ROLE_CUSTOMER);
-            newUser.setPhone("9304200977");
+            newUser.setMobile("9304200977");
             newUser.setPassword(passwordEncoder.encode(request.getOtp()));
             user = userRepository.save(newUser);
 
@@ -186,8 +186,6 @@ public class AuthServiceImpl implements AuthService {
         AuthResponse authResponse = new AuthResponse();
         authResponse.setJwtToken(jwtToken);
         authResponse.setMessage("Login successful");
-        User user = userRepository.findByEmail(username);
-        authResponse.setName(user.getLastName());
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         String roleName = authorities.isEmpty()?null:authorities.iterator().next().getAuthority();
